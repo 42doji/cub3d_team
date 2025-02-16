@@ -32,16 +32,15 @@ static int validate_texture(const char *line)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 	{
-		close(fd);
+		free(path);
 		return (0);
 	}
-	close(fd);
+	if (fd > 0)
+		close(fd);
 	free(path);
 	path = NULL;
 	return (1);
 }
-
-
 
 int	parse_texture(const char *line, t_map *map, int texture_index)
 {
