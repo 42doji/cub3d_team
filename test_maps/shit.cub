@@ -1,6 +1,6 @@
-NO ./
+NO ./textures/north_texture.xpm
 SO ./textures/south_texture.xpm
-WE ./asdf
+WE ./textures/south_texture.xpm
 EA ./textures/east_texture.xpm
 C 255,255,255
 F 0,0,0

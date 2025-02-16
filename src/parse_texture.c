@@ -15,13 +15,29 @@
 static int validate_texture(const char *line)
 {
 	int fd;
+	char *path;
+	char **split;
 
-	fd = open(line, O_RDONLY);
+	trim_line_endings((char *) line);
+	split = ft_split(line, ' ');
+	if (!split || !split[1] || split[2])
+	{
+		free_split(split);
+		return (0);
+	}
+	path = ft_strdup(split[1]);
+	free_split(split);
+	if (!path)
+		return (0);
+	fd = open(path, O_RDONLY);
 	if (fd < 0)
 	{
 		close(fd);
 		return (0);
 	}
+	close(fd);
+	free(path);
+	path = NULL;
 	return (1);
 }
 
