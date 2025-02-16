@@ -31,14 +31,13 @@ static int	initialize_map_lines(char ***map_lines, int *map_size)
 
 static int	read_cub_file(int fd, t_map *map, char ***map_lines, int *map_size)
 {
-	char	*line;
 
-	line = get_next_line(fd);
-	while (line != NULL)
+	map->line = get_next_line(fd);
+	while (map->line != NULL)
 	{
-		if (!process_line(line, map, map_lines, map_size))
+		if (!process_line(map->line, map, map_lines, map_size))
 		{
-			free(line);
+			free(map->line);
 			free_map_resources(NULL, map);
 			free_split(*map_lines);
 			*map_lines = NULL;
@@ -46,8 +45,8 @@ static int	read_cub_file(int fd, t_map *map, char ***map_lines, int *map_size)
 			error_handler(MAP_SIZE_ERROR, NULL, map);
 			return (0);
 		}
-		free(line);
-		line = get_next_line(fd);
+		free(map->line);
+		map->line = get_next_line(fd);
 	}
 	get_next_line_cleanup(fd);
 	if (*map_lines == NULL)

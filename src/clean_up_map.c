@@ -56,5 +56,7 @@ void	cleanup_map(t_map *map)
 		return ;
 	free_textures(map);
 	free_grid(map);
+	free(map->line);
+	map->line = NULL;
 	free(map);
 }

@@ -36,6 +36,7 @@ typedef struct s_map
 	char		**grid;
 	int			width;
 	int			height;
+	char		*line;
 }	t_map;
 
 #endif

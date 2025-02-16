@@ -62,7 +62,7 @@ static int	validate_color_values(char **colors, t_color *color, t_map *map)
 	return (1);
 }
 
-static int	parse_color(const char *line, t_color *color, t_map *map)
+static int	parse_color(const char *line, t_color *color, t_map *map, char c)
 {
 	char	**split;
 	char	**colors;
@@ -77,6 +77,15 @@ static int	parse_color(const char *line, t_color *color, t_map *map)
 	}
 	colors = ft_split(split[1], ',');
 	free_split(split);
+	if (c == 'F' || c == 'C')
+	{
+		if (map->floor_color.r != -1 || map->ceiling_color.r != -1)
+		{
+			free_split(colors);
+			error_handler(DUPLICATE_KEY_ERROR, NULL, map);
+			return (0);
+		}
+	}
 	if (!colors || ft_splitlen(colors) != 3)
 	{
 		free_split(colors);
@@ -97,9 +106,9 @@ int	parse_settings(const char *line, t_map *map)
 	else if (ft_strncmp(line, "WE ", 3) == 0)
 		return (parse_texture(line, map, TEXTURE_WEST));
 	else if (ft_strncmp(line, "F ", 2) == 0)
-		return (parse_color(line, &map->floor_color, map));
+		return (parse_color(line, &map->floor_color, map, 'F'));
 	else if (ft_strncmp(line, "C ", 2) == 0)
-		return (parse_color(line, &map->ceiling_color, map));
+		return (parse_color(line, &map->ceiling_color, map, 'C'));
 	error_handler(TEXTURE_ERROR, NULL, map);
 	return (0);
 }
