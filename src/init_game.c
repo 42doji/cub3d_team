@@ -14,6 +14,8 @@
 
 static int	load_single_texture(t_game *game, int texture_index)
 {
+	if (!game->map->texture[texture_index].path)
+		return (error_handler(TEXTURE_ERROR, game, game->map), 0);
 	game->map->texture[texture_index].img.img = mlx_xpm_file_to_image(game->mlx,
 			game->map->texture[texture_index].path,
 			&game->map->texture[texture_index].img.width,

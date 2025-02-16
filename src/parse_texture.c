@@ -12,11 +12,28 @@
 
 #include "cub3d.h"
 
+static int validate_texture(const char *line)
+{
+	int fd;
+
+	fd = open(line, O_RDONLY);
+	if (fd < 0)
+	{
+		close(fd);
+		return (0);
+	}
+	return (1);
+}
+
+
+
 int	parse_texture(const char *line, t_map *map, int texture_index)
 {
 	char	**split;
 	char	*path;
 
+	if (!validate_texture(line))
+		error_handler(TEXTURE_ERROR, NULL, map);
 	trim_line_endings((char *)line);
 	split = ft_split(line, ' ');
 	if (!split || !split[1] || split[2])

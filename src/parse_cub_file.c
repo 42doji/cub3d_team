@@ -93,8 +93,11 @@ static int	parse_color(const char *line, t_color *color, t_map *map, char c)
 	return (validate_color_values(colors, color, map));
 }
 
+
+
 int	parse_settings(const char *line, t_map *map)
 {
+
 	if (ft_strncmp(line, "NO ", 3) == 0)
 		return (parse_texture(line, map, TEXTURE_NORTH));
 	else if (ft_strncmp(line, "SO ", 3) == 0)
