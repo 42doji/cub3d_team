@@ -77,14 +77,12 @@ static int	parse_color(const char *line, t_color *color, t_map *map, char c)
 	}
 	colors = ft_split(split[1], ',');
 	free_split(split);
-	if (c == 'F' || c == 'C')
+	if ((c == 'F' && map->floor_color.r != -1) || \
+		(c == 'C' && map->ceiling_color.r != -1))
 	{
-		if (map->floor_color.r != -1 || map->ceiling_color.r != -1)
-		{
-			free_split(colors);
-			error_handler(DUPLICATE_KEY_ERROR, NULL, map);
-			return (0);
-		}
+		free_split(colors);
+		error_handler(DUPLICATE_KEY_ERROR, NULL, map);
+		return (0);
 	}
 	if (!colors || ft_splitlen(colors) != 3)
 	{

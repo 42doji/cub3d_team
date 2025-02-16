@@ -58,5 +58,7 @@ void	cleanup_map(t_map *map)
 	free_grid(map);
 	free(map->line);
 	map->line = NULL;
+	free_split(map->map_lines);
+	map->map_lines = NULL;
 	free(map);
 }

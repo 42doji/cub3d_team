@@ -22,9 +22,8 @@ static int	open_cub_file(char *file_name, t_map *map)
 	return (fd);
 }
 
-static int	initialize_map_lines(char ***map_lines, int *map_size)
+static int	initialize_map_lines(int *map_size)
 {
-	*map_lines = NULL;
 	*map_size = 0;
 	return (1);
 }
@@ -75,21 +74,20 @@ static int	finalize_parsing(int fd, char ***map_lines, t_map *map)
 int	parse_cub_file(char *file_name, t_map *map)
 {
 	int		fd;
-	char	**map_lines;
 	int		map_size;
 
 	fd = open_cub_file(file_name, map);
 	if (fd == -1)
 		return (0);
-	if (!initialize_map_lines(&map_lines, &map_size))
+	if (!initialize_map_lines(&map_size))
 	{
 		close(fd);
 		return (0);
 	}
-	if (!read_cub_file(fd, map, &map_lines, &map_size))
+	if (!read_cub_file(fd, map, &map->map_lines, &map_size))
 	{
 		close(fd);
 		return (0);
 	}
-	return (finalize_parsing(fd, &map_lines, map));
+	return (finalize_parsing(fd, &map->map_lines, map));
 }

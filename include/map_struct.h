@@ -37,6 +37,7 @@ typedef struct s_map
 	int			width;
 	int			height;
 	char		*line;
+	char		**map_lines;
 }	t_map;
 
 #endif

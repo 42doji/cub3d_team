@@ -42,6 +42,8 @@ static void	init_map_properties(t_map *map)
 	map->width = -1;
 	map->height = -1;
 	map->grid = NULL;
+	map->line = NULL;
+	map->map_lines = NULL;
 }
 
 int	init_map_values(t_map *map)

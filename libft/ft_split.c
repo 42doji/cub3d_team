@@ -22,10 +22,12 @@ size_t	ft_splitlen(char **split)
 	return (i);
 }
 
-void	free_split(char **split)
+void free_split(char **split)
 {
-	size_t	i;
+	int i;
 
+	if (!split) // NULL이면 그냥 종료
+		return;
 	i = 0;
 	while (split[i])
 	{
@@ -35,7 +37,8 @@ void	free_split(char **split)
 	free(split);
 }
 
-static void	ft_allocate(char **tab, char const *s, char sep)
+
+static void ft_allocate(char **tab, char const *s, char sep)
 {
 	char		**tab_p;
 	char const	*tmp;
