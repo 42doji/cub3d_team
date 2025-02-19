@@ -35,6 +35,7 @@
 
 t_map	*init_map(char *file_name);
 void	error_handler(t_error error, t_game *game, t_map *map);
+void	free_split_error(char **split, t_error error, t_map *map);
 int		parse_cub_file(char *file_name, t_map *map);
 void	free_map_resources(t_game *game, t_map *map);
 int		parse_map(char **lines, t_map *map);

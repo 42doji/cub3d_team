@@ -12,11 +12,11 @@
 
 #include "cub3d.h"
 
-static int validate_texture(const char *line)
+static int	validate_texture(const char *line)
 {
-	int fd;
-	char *path;
-	char **split;
+	int		fd;
+	char	*path;
+	char	**split;
 
 	trim_line_endings((char *) line);
 	split = ft_split(line, ' ');

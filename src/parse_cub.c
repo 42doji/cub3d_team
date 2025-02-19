@@ -30,7 +30,6 @@ static int	initialize_map_lines(int *map_size)
 
 static int	read_cub_file(int fd, t_map *map, char ***map_lines, int *map_size)
 {
-
 	map->line = get_next_line(fd);
 	while (map->line != NULL)
 	{

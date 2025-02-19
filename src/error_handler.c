@@ -56,3 +56,9 @@ void	error_handler(t_error error, t_game *game, t_map *map)
 	cleanup_resources(game, map);
 	exit(EXIT_FAILURE);
 }
+
+void	free_split_error(char **split, t_error error, t_map *map)
+{
+	free_split(split);
+	error_handler(error, NULL, map);
+}
