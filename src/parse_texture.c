@@ -12,6 +12,18 @@
 
 #include "cub3d.h"
 
+static int	fd_check(const char *path)
+{
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	if (fd > 0)
+		close(fd);
+	return (1);
+}
+
 static int	validate_texture(const char *line)
 {
 	int		fd;
@@ -29,14 +41,11 @@ static int	validate_texture(const char *line)
 	free_split(split);
 	if (!path)
 		return (0);
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
+	if (!fd_check(path))
 	{
 		free(path);
 		return (0);
 	}
-	if (fd > 0)
-		close(fd);
 	free(path);
 	path = NULL;
 	return (1);
