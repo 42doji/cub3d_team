@@ -26,7 +26,6 @@ static int	fd_check(const char *path)
 
 static int	validate_texture(const char *line)
 {
-	int		fd;
 	char	*path;
 	char	**split;
 
